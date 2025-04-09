@@ -1,7 +1,5 @@
 package com.tmoreno.mooc.backoffice.course.create;
 
-import com.tmoreno.mooc.backoffice.course.module.create.CreateModuleResponse;
-
 import java.time.Instant;
 import java.util.List;
 

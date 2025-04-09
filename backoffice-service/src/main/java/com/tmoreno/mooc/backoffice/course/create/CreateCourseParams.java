@@ -1,7 +1,5 @@
 package com.tmoreno.mooc.backoffice.course.create;
 
-import com.tmoreno.mooc.backoffice.course.module.create.CreateModuleParams;
-
 import java.util.List;
 
 public record CreateCourseParams(
