@@ -8,7 +8,7 @@ import com.tmoreno.mooc.backoffice.course.domain.CourseTitle;
 import com.tmoreno.mooc.backoffice.course.domain.Lesson;
 import com.tmoreno.mooc.backoffice.course.domain.Module;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseExistsException;
-import com.tmoreno.mooc.backoffice.shared.domain.EventBus;
+import com.tmoreno.mooc.backoffice.shared.events.EventBus;
 import com.tmoreno.mooc.backoffice.shared.domain.Identifier;
 import com.tmoreno.mooc.backoffice.shared.domain.Language;
 import com.tmoreno.mooc.backoffice.shared.domain.Price;

@@ -1,4 +1,6 @@
-package com.tmoreno.mooc.backoffice.shared.domain;
+package com.tmoreno.mooc.backoffice.shared.events;
+
+import com.tmoreno.mooc.backoffice.shared.domain.Identifier;
 
 import java.time.Instant;
 import java.util.Map;
