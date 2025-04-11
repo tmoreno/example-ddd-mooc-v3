@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.shared.services;
+package com.tmoreno.mooc.backoffice.shared;
 
 import java.util.function.Supplier;
 

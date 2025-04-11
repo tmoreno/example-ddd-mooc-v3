@@ -8,7 +8,7 @@ import com.tmoreno.mooc.backoffice.course.domain.Module;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseExistsException;
 import com.tmoreno.mooc.backoffice.shared.events.EventBus;
 import com.tmoreno.mooc.backoffice.shared.domain.Price;
-import com.tmoreno.mooc.backoffice.shared.services.TransactionalService;
+import com.tmoreno.mooc.backoffice.shared.TransactionalService;
 
 import java.util.List;
 import java.util.function.Function;
