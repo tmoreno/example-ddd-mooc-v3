@@ -8,6 +8,7 @@ import com.tmoreno.mooc.backoffice.course.domain.Module;
 import com.tmoreno.mooc.backoffice.course.domain.exceptions.CourseExistsException;
 import com.tmoreno.mooc.backoffice.shared.events.EventBus;
 import com.tmoreno.mooc.backoffice.shared.domain.Price;
+import com.tmoreno.mooc.backoffice.shared.services.TransactionalService;
 
 import java.util.List;
 import java.util.function.Function;
@@ -15,28 +16,32 @@ import java.util.function.Function;
 public final class CreateCourseUseCase implements ForCreateCourse {
 
     private final CourseRepository repository;
+    private final TransactionalService transactionalService;
     private final EventBus eventBus;
 
-    public CreateCourseUseCase(CourseRepository repository, EventBus eventBus) {
+    public CreateCourseUseCase(CourseRepository repository, TransactionalService transactionalService, EventBus eventBus) {
         this.repository = repository;
+        this.transactionalService = transactionalService;
         this.eventBus = eventBus;
     }
 
     @Override
     public CreateCourseResponse create(CreateCourseParams params) {
-        CourseTitle title = new CourseTitle(params.title());
+        return transactionalService.execute(() -> {
+            CourseTitle title = new CourseTitle(params.title());
 
-        if (repository.exists(title)) {
-            throw new CourseExistsException(title);
-        }
+            if (repository.exists(title)) {
+                throw new CourseExistsException(title);
+            }
 
-        Course course = createCourse(params);
+            Course course = createCourse(params);
 
-        repository.save(course);
+            repository.save(course);
 
-        eventBus.publish(course.pullEvents());
+            eventBus.publish(course.pullEvents());
 
-        return toCreateCourseResponse(course);
+            return toCreateCourseResponse(course);
+        });
     }
 
     private static Course createCourse(CreateCourseParams params) {
