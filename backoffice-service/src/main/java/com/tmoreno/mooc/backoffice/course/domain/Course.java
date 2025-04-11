@@ -1,5 +1,6 @@
 package com.tmoreno.mooc.backoffice.course.domain;
 
+import com.tmoreno.mooc.backoffice.course.domain.events.CourseCreatedDomainEvent;
 import com.tmoreno.mooc.backoffice.shared.domain.AggregateRoot;
 import com.tmoreno.mooc.backoffice.shared.domain.Identifier;
 import com.tmoreno.mooc.backoffice.shared.domain.Language;
@@ -67,7 +68,7 @@ public final class Course extends AggregateRoot<CourseId> {
     ) {
         Instant now = Instant.now();
 
-        return new Course(
+        Course course = new Course(
             new CourseId(),
             new CourseTitle(title),
             imageUrl == null ? null : new CourseImageUrl(imageUrl),
@@ -80,6 +81,10 @@ public final class Course extends AggregateRoot<CourseId> {
             now,
             now
         );
+
+        course.recordEvent(new CourseCreatedDomainEvent(course));
+
+        return course;
     }
 
     public String getTitle() {
