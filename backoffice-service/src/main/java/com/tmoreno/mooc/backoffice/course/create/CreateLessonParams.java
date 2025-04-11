@@ -2,6 +2,6 @@ package com.tmoreno.mooc.backoffice.course.create;
 
 public record CreateLessonParams(
     String title,
-    double durationInSeconds
+    int durationInSeconds
 ) {
 }
