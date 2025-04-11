@@ -1,6 +1,7 @@
 package com.tmoreno.mooc.backoffice.shared.domain;
 
 import java.time.Instant;
+import java.util.Map;
 
 public abstract class DomainEvent {
 
@@ -9,32 +10,38 @@ public abstract class DomainEvent {
     private final String eventName;
     private final int version;
     private final Instant occurredOn;
+    private final Map<String, Object> payload;
 
-    protected DomainEvent(Identifier aggregateId, String eventName, int version) {
+    protected DomainEvent(Identifier aggregateId, String eventName, int version, Map<String, Object> payload) {
         this.eventId = new Identifier();
         this.aggregateId = aggregateId;
         this.eventName = eventName;
         this.version = version;
         this.occurredOn = Instant.now();
+        this.payload = payload;
     }
 
-    public Identifier getEventId() {
+    public final Identifier getEventId() {
         return eventId;
     }
 
-    public Identifier getAggregateId() {
+    public final Identifier getAggregateId() {
         return aggregateId;
     }
 
-    public String getEventName() {
+    public final String getEventName() {
         return eventName;
     }
 
-    public int getVersion() {
+    public final int getVersion() {
         return version;
     }
 
-    public Instant getOccurredOn() {
+    public final Instant getOccurredOn() {
         return occurredOn;
+    }
+
+    public final Map<String, Object> getPayload() {
+        return payload;
     }
 }
