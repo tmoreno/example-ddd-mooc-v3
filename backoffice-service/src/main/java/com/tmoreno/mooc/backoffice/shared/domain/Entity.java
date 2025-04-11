@@ -10,8 +10,8 @@ public abstract class Entity<I extends Identifier> {
         this.id = id;
     }
 
-    public final I getId() {
-        return id;
+    public final String getId() {
+        return id.getValue();
     }
 
     @Override

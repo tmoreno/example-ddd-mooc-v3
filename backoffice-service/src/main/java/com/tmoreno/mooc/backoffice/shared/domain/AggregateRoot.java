@@ -17,8 +17,8 @@ public abstract class AggregateRoot<I extends Identifier> {
         domainEvents = new ArrayList<>();
     }
 
-    public final I getId() {
-        return id;
+    public final String getId() {
+        return id.getValue();
     }
 
     public final List<DomainEvent> pullEvents() {
