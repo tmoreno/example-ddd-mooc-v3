@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.course.create;
+package com.tmoreno.mooc.backoffice.course.application.create;
 
 import com.tmoreno.mooc.backoffice.course.domain.Course;
 import com.tmoreno.mooc.backoffice.course.domain.CourseRepository;

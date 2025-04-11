@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.course.create;
+package com.tmoreno.mooc.backoffice.course.application.create;
 
 public record CreateLessonResponse(
     String id,
