@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.course.infrastructure.commons;
+package com.tmoreno.mooc.backoffice.course.infrastructure.framework;
 
 import com.tmoreno.mooc.backoffice.shared.TransactionalService;
 import jakarta.transaction.Transactional;

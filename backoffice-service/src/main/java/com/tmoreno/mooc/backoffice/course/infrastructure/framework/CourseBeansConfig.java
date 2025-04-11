@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.course.infrastructure.config;
+package com.tmoreno.mooc.backoffice.course.infrastructure.framework;
 
 import com.tmoreno.mooc.backoffice.course.application.create.CreateCourseUseCase;
 import com.tmoreno.mooc.backoffice.course.application.create.ForCreateCourse;
