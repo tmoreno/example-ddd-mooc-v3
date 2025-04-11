@@ -1,10 +1,7 @@
 package com.tmoreno.mooc.backoffice.course.domain;
 
-import com.tmoreno.mooc.backoffice.course.create.CreateLessonParams;
 import com.tmoreno.mooc.backoffice.shared.domain.DurationInSeconds;
 import com.tmoreno.mooc.backoffice.shared.domain.Entity;
-
-import java.util.Map;
 
 public final class Lesson extends Entity<LessonId> {
 
@@ -17,19 +14,19 @@ public final class Lesson extends Entity<LessonId> {
         this.duration = duration;
     }
 
-    public static Lesson create(CreateLessonParams params) {
+    public static Lesson create(String title, int durationInSeconds) {
         return new Lesson(
             new LessonId(),
-            new LessonTitle(params.title()),
-            new DurationInSeconds(params.durationInSeconds())
+            new LessonTitle(title),
+            new DurationInSeconds(durationInSeconds)
         );
     }
 
-    public LessonTitle getTitle() {
-        return title;
+    public String getTitle() {
+        return title.value();
     }
 
-    public DurationInSeconds getDuration() {
-        return duration;
+    public int getDuration() {
+        return duration.value();
     }
 }

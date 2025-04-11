@@ -1,6 +1,7 @@
 package com.tmoreno.mooc.backoffice.course.create;
 
 import java.util.List;
+import java.util.Set;
 
 public record CreateCourseParams(
     String title,
@@ -10,6 +11,6 @@ public record CreateCourseParams(
     Double priceValue,
     String priceCurrency,
     List<CreateModuleParams> modules,
-    List<String> teachers
+    Set<String> teachers
 ) {
 }

@@ -2,6 +2,7 @@ package com.tmoreno.mooc.backoffice.course.create;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Set;
 
 public record CreateCourseResponse(
     String id,
@@ -12,7 +13,7 @@ public record CreateCourseResponse(
     Double priceValue,
     String priceCurrency,
     List<CreateModuleResponse> modules,
-    List<String> teachers,
+    Set<String> teachers,
     Instant createdOn
 ) {
 }

@@ -1,7 +1,7 @@
 package com.tmoreno.mooc.backoffice.course.domain;
 
-import com.tmoreno.mooc.backoffice.course.create.CreateCourseParams;
 import com.tmoreno.mooc.backoffice.shared.domain.AggregateRoot;
+import com.tmoreno.mooc.backoffice.shared.domain.Identifier;
 import com.tmoreno.mooc.backoffice.shared.domain.Language;
 import com.tmoreno.mooc.backoffice.shared.domain.Price;
 import com.tmoreno.mooc.backoffice.teacher.domain.TeacherId;
@@ -55,50 +55,51 @@ public final class Course extends AggregateRoot<CourseId> {
         this.updatedOn = updatedOn;
     }
 
-    public static Course create(CreateCourseParams params) {
+    public static Course create(
+        String title,
+        String imageUrl,
+        String description,
+        String language,
+        Double priceValue,
+        String priceCurrency,
+        List<Module> modules,
+        Set<String> teachers
+    ) {
         Instant now = Instant.now();
-
-        Map<ModuleId, Module> modules = params.modules() == null
-            ? Map.of()
-            : params.modules().stream().map(Module::create).collect(Collectors.toMap(Module::getId, module -> module));
-
-        Set<TeacherId> teachers = params.teachers() == null
-            ? Set.of()
-            : params.teachers().stream().map(TeacherId::new).collect(Collectors.toSet());
 
         return new Course(
             new CourseId(),
-            new CourseTitle(params.title()),
-            params.imageUrl() == null ? null : new CourseImageUrl(params.imageUrl()),
-            params.description() == null ? null : new CourseDescription(params.description()),
+            new CourseTitle(title),
+            imageUrl == null ? null : new CourseImageUrl(imageUrl),
+            description == null ? null : new CourseDescription(description),
             CourseState.DRAFT,
-            params.language() == null ? null : Language.valueOf(params.language()),
-            params.priceValue() == null || params.priceCurrency() == null ? null : new Price(params.priceValue(), Currency.getInstance(params.priceCurrency())),
-            modules,
-            teachers,
+            language == null ? null : Language.valueOf(language),
+            priceValue == null || priceCurrency == null ? null : new Price(priceValue, Currency.getInstance(priceCurrency)),
+            modules == null ? Map.of() : modules.stream().collect(Collectors.toMap(module -> new ModuleId(module.getId()), module -> module)),
+            teachers == null ? Set.of() : teachers.stream().map(TeacherId::new).collect(Collectors.toSet()),
             now,
             now
         );
     }
 
-    public CourseTitle getTitle() {
-        return title;
+    public String getTitle() {
+        return title.value();
     }
 
-    public Optional<CourseImageUrl> getImageUrl() {
-        return Optional.ofNullable(imageUrl);
+    public Optional<String> getImageUrl() {
+        return Optional.ofNullable(imageUrl).map(CourseImageUrl::value);
     }
 
-    public Optional<CourseDescription> getDescription() {
-        return Optional.ofNullable(description);
+    public Optional<String> getDescription() {
+        return Optional.ofNullable(description).map(CourseDescription::value);
     }
 
-    public CourseState getState() {
-        return state;
+    public String getState() {
+        return state.name();
     }
 
-    public Optional<Language> getLanguage() {
-        return Optional.ofNullable(language);
+    public Optional<String> getLanguage() {
+        return Optional.ofNullable(language).map(Enum::name);
     }
 
     public Optional<Price> getPrice() {
@@ -109,8 +110,8 @@ public final class Course extends AggregateRoot<CourseId> {
         return List.copyOf(modules.values());
     }
 
-    public Set<TeacherId> getTeachers() {
-        return Set.copyOf(teachers);
+    public Set<String> getTeachers() {
+        return teachers.stream().map(Identifier::getValue).collect(Collectors.toSet());
     }
 
     public Instant getCreatedOn() {

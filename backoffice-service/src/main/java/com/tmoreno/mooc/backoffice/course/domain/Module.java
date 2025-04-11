@@ -1,6 +1,5 @@
 package com.tmoreno.mooc.backoffice.course.domain;
 
-import com.tmoreno.mooc.backoffice.course.create.CreateModuleParams;
 import com.tmoreno.mooc.backoffice.shared.domain.Entity;
 
 import java.util.ArrayList;
@@ -17,18 +16,16 @@ public final class Module extends Entity<ModuleId> {
         this.lessons = new ArrayList<>(lessons);
     }
 
-    public static Module create(CreateModuleParams params) {
-        List<Lesson> lessons = params.lessons().stream().map(Lesson::create).toList();
-
+    public static Module create(String title, List<Lesson> lessons) {
         return new Module(
             new ModuleId(),
-            new ModuleTitle(params.title()),
+            new ModuleTitle(title),
             lessons
         );
     }
 
-    public ModuleTitle getTitle() {
-        return title;
+    public String getTitle() {
+        return title.value();
     }
 
     public List<Lesson> getLessons() {
