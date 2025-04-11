@@ -1,4 +1,4 @@
-package com.tmoreno.mooc.backoffice.shared.events;
+package com.tmoreno.mooc.backoffice.shared.domain.events;
 
 import com.tmoreno.mooc.backoffice.shared.domain.Identifier;
 

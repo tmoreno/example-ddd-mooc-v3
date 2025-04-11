@@ -1,6 +1,6 @@
 package com.tmoreno.mooc.backoffice.shared.domain;
 
-import com.tmoreno.mooc.backoffice.shared.events.DomainEvent;
+import com.tmoreno.mooc.backoffice.shared.domain.events.DomainEvent;
 
 import java.util.ArrayList;
 import java.util.List;
